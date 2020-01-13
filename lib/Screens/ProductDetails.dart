@@ -14,54 +14,59 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
-  showAlertDialog() {
-    showDialog(context: context,
-    builder: (_)=> new AlertDialog(
-      title: Text('Congratulation'),
-      content: Text('Product add to your cart successfully'),
-        actions: <Widget>[
-        FlatButton(
-          child: Text('Ok'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
-    ));
-      }
-//      actions: <Widget>[
-//        FlatButton(
-//          child: Text('Ok'),
-//          onPressed: () {
-//            Navigator.of(context).pop();
-//          },
-//        ),
-//      ],
-    //);
-//    AlertDialog dialog = new AlertDialog(
-//
-//    );
-//    showDialog(context: context, child: dialog);
- // }
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
-  showLocalNotification(){
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
+    var initializationSettingsAndroid =
+        new AndroidInitializationSettings('icon');
+    var initializationSettingsIOS = IOSInitializationSettings();
+    var initializationSettings = InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelectNotification);
+  }
+
+  showAlertDialog() {
+    showDialog(
+        context: context,
+        builder: (_) => new AlertDialog(
+              title: Text('Congratulation'),
+              content: Text('Product add to your cart successfully'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Ok'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    showLocalNotification();
+                  },
+                ),
+              ],
+            ));
+  }
+  Future showLocalNotification() async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'your channel id', 'your channel name', 'your channel description',
         importance: Importance.Max, priority: Priority.High, ticker: 'ticker');
     var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    //MyApp()
-//    await flutterLocalNotificationsPlugin.show(
-//        0, 'plain title', 'plain body', platformChannelSpecifics,
-//        payload: 'item x');
+    await flutterLocalNotificationsPlugin.show(
+        0, 'plain title', 'plain body', platformChannelSpecifics,
+        payload: 'item x');
   }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
+  Future onSelectNotification(String payload) async {
+    if (payload != null) {
+      debugPrint('notification payload: ' + payload);
+    }
+    await Navigator.push(
+      context,
+      new MaterialPageRoute(builder: (context) => new MyApp()),
+    );
   }
 
   @override

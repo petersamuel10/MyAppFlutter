@@ -8,8 +8,15 @@ const baseUrl = "http://app.villa-vanillaa.com/api/";
 class APIManger extends StatefulWidget {
   APIManger();
 
+  Future<Response> getSliderImages() async {
+    String url = baseUrl+"GetSlider.php";
+    Map<String, String> headers = {"Cache-Control": "application/json"};
+    Response response = await post(url, headers: headers, body: null);
+    return response;
+  }
+
   Future<Response> getCategory() async {
-    String url = "http://app.villa-vanillaa.com/api/GetCategory.php";
+    String url = baseUrl+"GetCategory.php";
     Map<String, String> headers = {"Cache-Control": "application/json"};
     String postData = '{"level":0}';
     Response response = await post(url, headers: headers, body: postData);
@@ -17,7 +24,7 @@ class APIManger extends StatefulWidget {
   }
 
   Future<Response> getProducts(String categoryId) async {
-    String url = "http://app.villa-vanillaa.com/api/GetProductWhereCategoryID.php";
+    String url = baseUrl+"GetProductWhereCategoryID.php";
     Map<String, String> headers = {"Cache-Control": "application/json"};
     String postData = '{"limit":0, "category_id": $categoryId}';
     Response response = await post(url, headers: headers, body: postData);
@@ -34,13 +41,13 @@ class APIManger extends StatefulWidget {
 class ApiManager extends StatefulWidget {
   ApiManager();
 
-  Future<Response> getCategory() async {
-    String url = "http://app.villa-vanillaa.com/api/GetCategory.php";
-    Map<String, String> headers = {"Cache-Control": "application/json"};
-    String postData = '{"level":0}';
-    Response response = await post(url, headers: headers, body: postData);
-    return response;
-  }
+//  Future<Response> getCategory() async {
+//    String url = "http://app.villa-vanillaa.com/api/GetCategory.php";
+//    Map<String, String> headers = {"Cache-Control": "application/json"};
+//    String postData = '{"level":0}';
+//    Response response = await post(url, headers: headers, body: postData);
+//    return response;
+//  }
 
 
 
