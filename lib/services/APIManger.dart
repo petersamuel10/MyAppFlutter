@@ -11,7 +11,7 @@ class APIManger extends StatefulWidget {
   Future<Response> getSliderImages() async {
     String url = baseUrl+"GetSlider.php";
     Map<String, String> headers = {"Cache-Control": "application/json"};
-    Response response = await post(url, headers: headers, body: null);
+    Response response = await post(url, headers: headers, body: '');
     return response;
   }
 

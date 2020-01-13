@@ -67,8 +67,8 @@ class _MainDrawerState extends State<MainDrawer> {
         child: new Column(
           children: <Widget>[
             new UserAccountsDrawerHeader(
-              accountName: new Text("John Doe"),
-              accountEmail: null,
+              accountName: new Text("Peter samuel"),
+              accountEmail: Text("petersamuel@gmail.com"),
               currentAccountPicture: Image.asset('assets/placeholder.png'),
             ),
             new Column(children: drawerOptions)
