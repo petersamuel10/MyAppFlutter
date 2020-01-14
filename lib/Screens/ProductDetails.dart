@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -16,6 +17,7 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   @override
   void initState() {
@@ -30,6 +32,8 @@ class _ProductDetailsState extends State<ProductDetails> {
     flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: onSelectNotification);
+
+    getMessage();
   }
 
   showAlertDialog() {
@@ -69,6 +73,16 @@ class _ProductDetailsState extends State<ProductDetails> {
       new MaterialPageRoute(builder: (context) => new MyApp()),
     );
   }
+  getMessage() {
+    _firebaseMessaging.configure(
+        onMessage: (Map<String, dynamic> message) async {
+      print('on message $message');
+    }, onResume: (Map<String, dynamic> message) async {
+      print('on resume $message');
+    }, onLaunch: (Map<String, dynamic> message) async {
+      print('on launch $message');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,8 +100,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: <Widget>[
                 Positioned.fill(
                   child: CachedNetworkImage(
-                    imageUrl:
-                    "http://assets.villa-vanillaa.com" +
+                    imageUrl: "http://assets.villa-vanillaa.com" +
                         widget.product.productImg,
                     placeholder: (context, url) => LinearProgressIndicator(),
                     errorWidget: (context, url, error) => Icon(Icons.error),

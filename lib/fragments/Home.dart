@@ -7,7 +7,7 @@ import 'package:myapp/model/Category.dart';
 import 'package:myapp/model/SliderImage.dart';
 import 'package:myapp/services/APIManger.dart';
 
-import '../CategoryList.dart';
+import 'CategoryList.dart';
 
 class Home extends StatefulWidget {
   @override

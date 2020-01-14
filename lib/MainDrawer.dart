@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/fragments/Cart.dart';
+import 'package:flutter/services.dart';
 import 'package:myapp/fragments/Home.dart';
 import 'package:myapp/fragments/Profile.dart';
 
@@ -13,9 +13,8 @@ class DrawerItem {
 class MainDrawer extends StatefulWidget {
   final drawerItems = [
     new DrawerItem("Home", Icons.home),
-    new DrawerItem("Shopping cart", Icons.shopping_cart),
     new DrawerItem("Profile", Icons.person),
-    new DrawerItem("Logout", Icons.exit_to_app)
+    new DrawerItem("Exit", Icons.exit_to_app)
   ];
 
   @override
@@ -30,9 +29,10 @@ class _MainDrawerState extends State<MainDrawer> {
       case 0:
         return new Home();
       case 1:
-        return new Cart();
-      case 2:
         return new Profile();
+      case 2:
+        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+        break;
 
       default:
         return new Text("Error");
