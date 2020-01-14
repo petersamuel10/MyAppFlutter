@@ -14,7 +14,6 @@ class APIManger extends StatefulWidget {
     Response response = await post(url, headers: headers, body: '');
     return response;
   }
-
   Future<Response> getCategory() async {
     String url = baseUrl+"GetCategory.php";
     Map<String, String> headers = {"Cache-Control": "application/json"};
@@ -22,7 +21,6 @@ class APIManger extends StatefulWidget {
     Response response = await post(url, headers: headers, body: postData);
     return response;
   }
-
   Future<Response> getProducts(String categoryId) async {
     String url = baseUrl+"GetProductWhereCategoryID.php";
     Map<String, String> headers = {"Cache-Control": "application/json"};

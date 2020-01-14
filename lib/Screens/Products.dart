@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/model/Category.dart';
 import 'package:myapp/model/Product.dart';
@@ -51,20 +52,26 @@ class _ProductsState extends State<Products> {
             child: Card(
                 elevation: 2,
                 child: InkWell(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProductDetails(
-                          product: products[index],
-                        ),
-                      )),
+                  onTap: () =>
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ProductDetails(
+                                  product: products[index],
+                                ),
+                          )),
                   child: Stack(
                     children: <Widget>[
                       Positioned.fill(
-                        child: Image.network(
-                          "http://assets.villa-vanillaa.com" +
-                              products[index].productImg,
-                          fit: BoxFit.fill,
+                        child: CachedNetworkImage(
+                            imageUrl:
+                            "http://assets.villa-vanillaa.com" +
+                                products[index].productImg,
+                          placeholder: (context, url) =>
+                              LinearProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          fit: BoxFit.cover,
                         ),
                       ),
                       Align(

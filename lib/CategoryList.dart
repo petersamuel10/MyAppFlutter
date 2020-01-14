@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/services/APIManger.dart';
 
@@ -58,12 +59,22 @@ class _CategoryListState extends State<CategoryList> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Image.network(
-                        "http://assets.villa-vanillaa.com" + item.categoryIcon,
+                      CachedNetworkImage(
+                        imageUrl: "http://assets.villa-vanillaa.com" +
+                            item.categoryIcon,
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                         height: 130,
                         width: 140,
                         fit: BoxFit.fill,
                       ),
+//                      Image(
+//                        image: CachedNetworkImageProvider(
+//                            "http://assets.villa-vanillaa.com" +
+//                                item.categoryIcon),
+//
+//                      ),
                       Flexible(
                         child: Center(
                           child: Text(
