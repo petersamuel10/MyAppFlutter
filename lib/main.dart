@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/MainDrawer.dart';
+import 'package:myapp/Screens/Map.dart';
 import 'package:myapp/Screens/ProductDetails.dart';
 import 'package:myapp/Screens/Products.dart';
 
@@ -24,6 +25,7 @@ class _MyAppState extends State<MyApp> {
         '/': (context) => MainDrawer(),
         '/products': (context) => Products(),
         '/productDetails': (context) => ProductDetails(),
+        '/MapLocation': (context) => MapLocation(),
       },
     );
   }

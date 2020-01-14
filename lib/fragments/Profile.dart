@@ -103,7 +103,8 @@ class _ProfileState extends State<Profile> {
             onTap: () {
               switch (position) {
                 case 1:
-                  _showDialog(_name, position);
+                  Map();
+                  // _showDialog(_name, position);
                   break;
                 case 2:
                   _showDialog(_email, position);
@@ -112,7 +113,7 @@ class _ProfileState extends State<Profile> {
                   _showDialog(_phone, position);
                   break;
                 case 4:
-                  Map();
+                  Navigator.pushNamed(context, '/MapLocation');
                   break;
               }
             },
