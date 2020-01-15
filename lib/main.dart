@@ -3,6 +3,7 @@ import 'package:myapp/MainDrawer.dart';
 import 'package:myapp/Screens/Map.dart';
 import 'package:myapp/Screens/ProductDetails.dart';
 import 'package:myapp/Screens/Products.dart';
+import 'package:myapp/Screens/SignIn.dart';
 
 void main() => runApp(MyApp());
 
@@ -22,7 +23,8 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => MainDrawer(),
+        '/': (context) => SignIn(),
+        '/home': (context) => MainDrawer(),
         '/products': (context) => Products(),
         '/productDetails': (context) => ProductDetails(),
         '/MapLocation': (context) => MapLocation(),

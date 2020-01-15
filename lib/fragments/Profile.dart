@@ -53,10 +53,10 @@ class _ProfileState extends State<Profile> {
             ),
           ),
           Padding(padding: EdgeInsets.all(12)),
-          getInfo(_name, Icons.person, 1),
-          getInfo(_email, Icons.email, 2),
-          getInfo(_phone, Icons.phone_android, 3),
-          getInfo('Kuwait, sharq, complex 11', Icons.business, 4),
+          _getInfo(_name, Icons.person, 1),
+          _getInfo(_email, Icons.email, 2),
+          _getInfo(_phone, Icons.phone_android, 3),
+          _getInfo('Kuwait, sharq, complex 11', Icons.business, 4),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 68),
             child: RaisedButton.icon(
@@ -73,7 +73,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  getInfo(String str, IconData icon, int position) {
+  _getInfo(String str, IconData icon, int position) {
     return Container(
       padding: EdgeInsets.all(8),
       margin: EdgeInsets.all(4.0),
@@ -103,8 +103,7 @@ class _ProfileState extends State<Profile> {
             onTap: () {
               switch (position) {
                 case 1:
-                  Map();
-                  // _showDialog(_name, position);
+                   _showDialog(_name, position);
                   break;
                 case 2:
                   _showDialog(_email, position);

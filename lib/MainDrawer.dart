@@ -14,7 +14,7 @@ class MainDrawer extends StatefulWidget {
   final drawerItems = [
     new DrawerItem("Home", Icons.home),
     new DrawerItem("Profile", Icons.person),
-    new DrawerItem("Exit", Icons.exit_to_app)
+    new DrawerItem("Logout", Icons.exit_to_app)
   ];
 
   @override
@@ -31,7 +31,8 @@ class _MainDrawerState extends State<MainDrawer> {
       case 1:
         return new Profile();
       case 2:
-        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+       Navigator.pushNamed(context, '/');
+        // SystemChannels.platform.invokeMethod('SystemNavigator.pop');
         break;
 
       default:

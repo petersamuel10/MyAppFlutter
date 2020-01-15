@@ -69,12 +69,6 @@ class _CategoryListState extends State<CategoryList> {
                         width: 140,
                         fit: BoxFit.fill,
                       ),
-//                      Image(
-//                        image: CachedNetworkImageProvider(
-//                            "http://assets.villa-vanillaa.com" +
-//                                item.categoryIcon),
-//
-//                      ),
                       Flexible(
                         child: Center(
                           child: Text(
