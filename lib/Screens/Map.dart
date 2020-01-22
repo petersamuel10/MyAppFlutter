@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapLocation extends StatefulWidget {
+  MapLocation({Key key}) : super(key: key);
+
   @override
   _MapLocationState createState() => _MapLocationState();
 }
@@ -13,19 +15,18 @@ class _MapLocationState extends State<MapLocation> {
 
   void _getLocation() async {
     var currentLocation = await Geolocator()
-        .getLastKnownPosition(desiredAccuracy: LocationAccuracy.best);
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
 
     setState(() {
       _markers.clear();
       final marker = Marker(
         markerId: MarkerId("curr_loc"),
-
         position: LatLng(currentLocation.latitude, currentLocation.longitude),
         infoWindow: InfoWindow(title: 'Your Location'),
       );
       lat = currentLocation.latitude;
       log = currentLocation.longitude;
-      print("location"+lat.toString());
+      print("location" + lat.toString());
       _markers["Current Location"] = marker;
     });
   }
@@ -40,6 +41,7 @@ class _MapLocationState extends State<MapLocation> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      appBar: AppBar(),
       body: GoogleMap(
         mapType: MapType.hybrid,
         initialCameraPosition: CameraPosition(

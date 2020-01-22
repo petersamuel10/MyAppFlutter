@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:myapp/Screens/Map.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -17,7 +18,6 @@ class _ProfileState extends State<Profile> {
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-
     setState(() {
       _image = image;
     });
@@ -60,9 +60,9 @@ class _ProfileState extends State<Profile> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 68),
             child: RaisedButton.icon(
-              icon: Icon(Icons.location_on),
-              label: Text('Map'),
-              onPressed: () {},
+              icon: Icon(Icons.update),
+              label: Text('Update'),
+              onPressed: () => showAlertDialog(),
               color: Colors.blue[300],
               textColor: Colors.white,
               splashColor: Colors.pink[100],
@@ -103,7 +103,7 @@ class _ProfileState extends State<Profile> {
             onTap: () {
               switch (position) {
                 case 1:
-                   _showDialog(_name, position);
+                  _showDialog(_name, position);
                   break;
                 case 2:
                   _showDialog(_email, position);
@@ -112,7 +112,12 @@ class _ProfileState extends State<Profile> {
                   _showDialog(_phone, position);
                   break;
                 case 4:
-                  Navigator.pushNamed(context, '/MapLocation');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MapLocation(),
+                      ));
+                  // Navigator.pushNamed(context, '/MapLocation');
                   break;
               }
             },
@@ -171,5 +176,22 @@ class _ProfileState extends State<Profile> {
         ],
       ),
     );
+  }
+
+  showAlertDialog() {
+    showDialog(
+        context: context,
+        builder: (_) => new AlertDialog(
+              title: Text('Congratulation'),
+              content: Text('Info updated successfully'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Ok'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ));
   }
 }
